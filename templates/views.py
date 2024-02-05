@@ -15,7 +15,7 @@ def search(request):
     if query:
         results = Book.objects.filter(
             models.Q(title__icontains=query) |
-            models.Q(author__icontains=query) |
+            models.Q(author__name__icontains=query) |
             models.Q(category__icontains=query) |
             models.Q(year__icontains=query)
         )
@@ -52,12 +52,17 @@ def view_books_by_year_and_category(request, category, year):
 
 
 def view_all_authors(request):
-    all_authors = Book.objects.values('author').distinct()
-    books_by_author = []
+    all_authors = Author.objects.all()
+    authors_with_books = []
     for author in all_authors:
-        books = Book.objects.filter(author=author['author'])
-        books_by_author.append({'author': author['author'], 'books': books})
-    return render(request, 'all_authors.html', {'authors': all_authors, 'books_by_author': books_by_author})
+        books = Book.objects.filter(author=author)
+        authors_with_books.append({'author': author, 'books': books})
+    return render(request, 'all_authors.html', {'authors': all_authors, 'authors_with_books': authors_with_books})
+
+
+def view_single_author(request, authorid):
+    single_author = get_object_or_404(Author, id=authorid)
+    return render(request, 'single_author.html', {'author': single_author})
 
 
 def view_all_categories(request):

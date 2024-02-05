@@ -17,7 +17,8 @@
 
                 <div class="card-body">
                     <h2 class="card-title">{{book.title}}</h2>
-                    <h4 class="card-subtitle mb-2 text-muted">{{book.author}}</h4>
+                    <h4 class="card-subtitle mb-2 text-muted"><a
+                            href="{% url 'single_author' book.author.id %}">{{book.author}}</a></h4>
                     <p class="card-text">Year: {{book.year}}</p>
                     <p class="card-text">Synopsis: {{book.synopsis}}</p>
                     <p class="card-text text-muted">Price: €{{book.price}}</p>

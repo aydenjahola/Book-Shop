@@ -16,9 +16,10 @@
                         <div class="col-md-8">
                             <h5 class="card-title"><a href="{% url 'single_book' book.id %}"
                                     class="text-decoration-none text-dark"><strong>{{ book.title }}</strong></a></h5>
-                            <p class="card-text mt-4 mb-0">Author: {{ book.author }}</p>
-                            <p class="card-text mb-0">Category: {{ book.category }}</p>
-                            <p class="card-text mb-0">Published: {{ book.year }}</p>
+                            <p class="card-text mt-4 mb-0"><strong>Author:</strong> <a
+                                    href="{% url 'single_author' book.author.id %}"> {{ book.author }}</a></p>
+                            <p class="card-text mb-0"><strong>Category:</strong> {{ book.category }}</p>
+                            <p class="card-text mb-0"><strong>Published:</strong> {{ book.year }}</p>
                         </div>
                         <div class="col-md-4">
                             {% if book.cover %}

@@ -22,7 +22,9 @@
                 <div class="card-body">
                     <h3 class="card-title text-primary"><a href="{% url 'single_book' book.id %}">{{ book.title }}</a>
                     </h3>
-                    <p class="card-tex mt-3 mb-2"><strong>Author:</strong> {{ book.author }}</p>
+                    <p class="card-tex mt-3 mb-2"><strong>Author:</strong>
+                        <a href="{% url 'single_author' book.author.id %}">{{ book.author }}</a>
+                    </p>
                     <p class="card-text"><strong>Year:</strong> {{ book.year }}</p>
                     <p class="card-text">{{ book.synopsis }}</p>
                 </div>

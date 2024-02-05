@@ -15,9 +15,12 @@
                     {% for book in books %}
                     <div class="book">
                         <h3>{{ book.title }}</h3>
-                        <p class="mb-0">Author: {{ book.author }}</p>
-                        <p class="mb-0">Category: {{book.category}}</p>
-                        <p class="mb-0">Published: {{ book.year }}</p>
+                        <p class="mb-0 mt-4"><strong>Author:</strong> <a
+                                href="{% url 'single_author' book.author.id %}">
+                                {{ book.author }}</a>
+                        </p>
+                        <p class="mb-0"><strong>Published:</strong> {{ book.year }}</p>
+                        <p class="mb-0"><strong>Category:</strong> {{ book.category }}</p>
                     </div>
 
                     {% if book.cover %}

@@ -6,18 +6,23 @@
 {% block content %}
 <!-- content specific to this page goes here -->
 <div class="card-group">
-    {% for author in authors %}
+    {% for author_with_books in authors_with_books %}
     <div class="col-lg-3 col-md-6 mb-4">
         <div class="card w-18">
-            <div class="card-body ">
-                <h5 class="card-title">{{ author.author }}</h5>
+            <div class="card-body">
+
+                {% if author_with_books.author.photo %}
+                <img src="{{ author_with_books.author.photo.url }}" alt="{{ author_with_books.author.name }} photo"
+                    class="img-fluid">
+                {% endif %}
+
+                <h5 class="card-title mt-5"><a href="{% url 'single_author' author_with_books.author.id %}">
+                        {{ author_with_books.author.name }}</a></h5>
+
+                <h6 class="card-title mt-3">Books:</h6>
                 <ul>
-                    {% for book_dict in books_by_author %}
-                    {% if book_dict.author == author.author %}
-                    {% for book in book_dict.books %}
+                    {% for book in author_with_books.books %}
                     <li><a href="{% url 'single_book' book.id %}">{{ book.title }}</a></li>
-                    {% endfor %}
-                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>

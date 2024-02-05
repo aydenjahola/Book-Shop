@@ -16,7 +16,8 @@
                 {% endif %}
 
                 <h5 class="card-title mb-1">{{ book.title }}</h5>
-                <h6 class="card-subtitle text-muted mt-4">{{ book.author }}</h6>
+                <h6 class="card-subtitle text-muted mt-4"><a href="{% url 'single_author' book.author.id %}">
+                        {{ book.author }}</a></h6>
                 <h7 class="card-subtitle text-muted">{{ book.year }}</h7>
                 <p class="card-text mt-3">{{ book.synopsis }}</p>
                 <a href="{% url 'single_book' book.id %}" class="btn btn-primary btn-sm">View Book</a>

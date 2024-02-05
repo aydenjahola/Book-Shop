@@ -12,6 +12,7 @@ urlpatterns = [
     path('books/category/<str:category>/year/<int:year>/',
          views.view_books_by_year_and_category, name='books_by_year_and_category'),
     path('books/authors/', views.view_all_authors, name='all_authors'),
+    path('authors/<int:authorid>/', views.view_single_author, name='single_author'),
     path('books/categories/', views.view_all_categories, name='all_categories'),
     path('books/years/', views.view_all_years, name='all_years')
 ]

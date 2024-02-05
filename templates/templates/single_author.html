@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<!-- the page title goes here -->
+{% endblock %}
+
+{% block content %}
+<!-- content specific to this page goes here -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+
+                {% if author.photo %}
+                <img class="card-img-top w-50 mb-25 mt-3" src="{{ author.photo.url }}" alt="{{ author.name }} Photo">
+                {% endif %}
+
+                <div class="card-body">
+                    <h2 class="card-title">{{ author.name }}</h2>
+                    <h7 class="card-subtitle text-muted mt-5">Born: {{ author.born }}</h7>
+                    <p class="card-subtitle text-muted mt-1">Died: {{ author.died }} (age <span
+                            id="authorAge">years</span> years) </p>
+                    <p class="card-text mt-4">Bio: {{ author.bio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Calculate age based on date of birth
+    document.addEventListener('DOMContentLoaded', function () {
+        var bornDate = new Date('{{ author.born }}');
+        var diedDate = new Date('{{ author.died }}');
+        var age = diedDate.getFullYear() - bornDate.getFullYear();
+        var m = diedDate.getMonth() - bornDate.getMonth();
+        if (m < 0 || (m === 0 && diedDate.getDate() < bornDate.getDate())) {
+            age--;
+        }
+        document.getElementById('authorAge').textContent = age;
+    });
+</script>
+
+{% endblock %}
