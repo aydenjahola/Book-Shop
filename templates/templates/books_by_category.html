@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+<!-- the page title goes here -->
+{% endblock %}
+
+{% block content %}
+<!-- content specific to the specific year goes here -->
+<div class="container">
+    <h1 class="text-center mt-5">Books in {{ category }} category</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-4">
+                <div class="card-body">
+                    {% for book in books %}
+                    <div class="book">
+                        <h3>{{ book.title }}</h3>
+                        <p>Author: {{ book.author }}</p>
+                        <p>Published: {{ book.year }}</p>
+                    </div>
+
+                    {% if book.cover %}
+                    <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover"
+                        style="width: 50%; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

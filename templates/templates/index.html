@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Welcome to Book Shop</title>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <h1>Welcome to Booktopia</h1>
+    <p>Discover a world of books!</p>
+    <a href="{% url 'all_books' %}" class="btn btn-primary">Browse Books</a>
+</div>
+
+
+{% endblock %}

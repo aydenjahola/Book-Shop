@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<!-- the page title goes here -->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Search Results for "{{ query }}"</h2>
+    <ul class="list-group mt-4">
+        {% for book in results %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="{% url 'single_book' book.id %}">{{ book.title }}</a>
+                    <p class="mb-0">Author: {{ book.author }}</p>
+                    <p class="mb-0">Category: {{ book.category }}</p>
+                    <p class="mb-0">Published: {{ book.year }}</p>
+                </div>
+                <div class="col-md-4">
+                    {% if book.cover %}
+                    <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" style="width: 35%;">
+                    {% endif %}
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No results found.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

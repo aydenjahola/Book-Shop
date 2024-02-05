@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+<!-- the page title goes here -->
+{% endblock %}
+
+{% block content %}
+<!-- content specific to this page goes here -->
+<div class="card-group">
+    {% for year in years %}
+    <div class="card" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="card-title">{{ year.year }}</h5>
+            <ul>
+                {% for book_dict in books_by_year %}
+                {% if book_dict.year == year.year %}
+                {% for book in book_dict.books %}
+                <li><a href="{% url 'single_book' book.id %}">{{ book.title }}</a></li>
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
