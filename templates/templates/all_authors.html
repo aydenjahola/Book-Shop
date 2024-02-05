@@ -7,18 +7,20 @@
 <!-- content specific to this page goes here -->
 <div class="card-group">
     {% for author in authors %}
-    <div class="card" style="width: 18rem">
-        <div class="card-body">
-            <h5 class="card-title">{{ author.author }}</h5>
-            <ul>
-                {% for book_dict in books_by_author %}
-                {% if book_dict.author == author.author %}
-                {% for book in book_dict.books %}
-                <li><a href="{% url 'single_book' book.id %}">{{ book.title }}</a></li>
-                {% endfor %}
-                {% endif %}
-                {% endfor %}
-            </ul>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card w-18">
+            <div class="card-body ">
+                <h5 class="card-title">{{ author.author }}</h5>
+                <ul>
+                    {% for book_dict in books_by_author %}
+                    {% if book_dict.author == author.author %}
+                    {% for book in book_dict.books %}
+                    <li><a href="{% url 'single_book' book.id %}">{{ book.title }}</a></li>
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
     {% endfor %}

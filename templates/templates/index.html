@@ -5,11 +5,34 @@
 {% endblock %}
 
 {% block content %}
-<div class="hero-section text-center">
-    <h1>Welcome to Booktopia</h1>
-    <p>Discover a world of books!</p>
-    <a href="{% url 'all_books' %}" class="btn btn-primary">Browse Books</a>
+<div class="hero-section text-center mt-5">
+    <h1 class="display-3 text-uppercase font-weight-bold text-primary">Welcome to <span
+            class="text-warning">Booktopia</span></h1>
+    <p class="lead">Discover a world of fascinating books!</p>
+    <a href="{% url 'all_books' %}" class="btn btn-primary btn-lg">Browse Books</a>
 </div>
 
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Featured Books</h2>
+    <div class="row">
+        {% for book in featured_books %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow">
+                <img src="{{ book.cover.url }}" class="card-img-top w-50" alt="{{ book.title }}">
+                <div class="card-body">
+                    <h3 class="card-title text-primary"><a href="{% url 'single_book' book.id %}">{{ book.title }}</a>
+                    </h3>
+                    <p class="card-tex mt-3 mb-2"><strong>Author:</strong> {{ book.author }}</p>
+                    <p class="card-text"><strong>Year:</strong> {{ book.year }}</p>
+                    <p class="card-text">{{ book.synopsis }}</p>
+                </div>
+                <div class="card-footer bg-light">
+                    <small class="text-muted">Last updated {{ book.updated_at|date:"F d, Y" }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

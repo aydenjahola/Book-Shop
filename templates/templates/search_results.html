@@ -6,27 +6,36 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="mt-4">Search Results for "{{ query }}"</h2>
-    <ul class="list-group mt-4">
+    <h2 class="mt-4 text-center">Search Results for "{{ query }}"</h2>
+    <div class="row justify-content-center mt-4">
         {% for book in results %}
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-md-8">
-                    <a href="{% url 'single_book' book.id %}">{{ book.title }}</a>
-                    <p class="mb-0">Author: {{ book.author }}</p>
-                    <p class="mb-0">Category: {{ book.category }}</p>
-                    <p class="mb-0">Published: {{ book.year }}</p>
-                </div>
-                <div class="col-md-4">
-                    {% if book.cover %}
-                    <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" style="width: 35%;">
-                    {% endif %}
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 class="card-title"><a href="{% url 'single_book' book.id %}"
+                                    class="text-decoration-none text-dark"><strong>{{ book.title }}</strong></a></h5>
+                            <p class="card-text mt-4 mb-0">Author: {{ book.author }}</p>
+                            <p class="card-text mb-0">Category: {{ book.category }}</p>
+                            <p class="card-text mb-0">Published: {{ book.year }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {% if book.cover %}
+                            <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" class="img-fluid rounded">
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </li>
+        </div>
         {% empty %}
-        <li class="list-group-item">No results found.</li>
+        <div class="col">
+            <div class="alert alert-warning" role="alert">
+                No results found.
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

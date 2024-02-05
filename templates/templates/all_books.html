@@ -5,20 +5,22 @@
 
 {% block content %}
 <!-- content specific to this page goes here -->
-<div class="card-group">
+<div class="row">
     {% for book in books %}
-    <div class="card" style="width: 18rem">
-        <div class="card-body">
-            {% if book.cover %}
-            <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover"
-                style="width: 50%; align-items: center; justify-content: center; margin-bottom: 25px;">
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
 
-            {% endif %}
-            <h5 class="card-title">{{ book.title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
-            <h7 class="card-subtitle mb-2 text-muted">{{ book.year }}</h7>
-            <p class="card-text">{{ book.synopsis }}</p>
-            <a href="{% url 'single_book' book.id %}" class="btn btn-primary">View Book</a>
+                {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" class="img-fluid mb-3 w-50">
+                {% endif %}
+
+                <h5 class="card-title mb-1">{{ book.title }}</h5>
+                <h6 class="card-subtitle text-muted mt-4">{{ book.author }}</h6>
+                <h7 class="card-subtitle text-muted">{{ book.year }}</h7>
+                <p class="card-text mt-3">{{ book.synopsis }}</p>
+                <a href="{% url 'single_book' book.id %}" class="btn btn-primary btn-sm">View Book</a>
+            </div>
         </div>
     </div>
     {% endfor %}

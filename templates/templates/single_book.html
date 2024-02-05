@@ -12,9 +12,8 @@
             <div class="card">
 
                 {% if book.cover %}
-                <img class="card-img-top" src="{{ book.cover.url }}" alt="{{ book.title }} Cover"
-                    style="width: 50%; align-items: center; justify-content: center; margin-bottom: 25px;">
-                {% endif %}
+                <img class="card-img-top w-50 mb-25 mt-3" src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+                {%endif %}
 
                 <div class="card-body">
                     <h2 class="card-title">{{book.title}}</h2>

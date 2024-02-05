@@ -6,7 +6,23 @@ from django.shortcuts import get_list_or_404
 
 
 def index(request):
-    return render(request, 'index.html')
+    featured_books = Book.objects.filter(is_featured=True)
+    return render(request, 'index.html', {'featured_books': featured_books})
+
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        results = Book.objects.filter(
+            models.Q(title__icontains=query) |
+            models.Q(author__icontains=query) |
+            models.Q(category__icontains=query) |
+            models.Q(year__icontains=query)
+        )
+    else:
+        results = []
+
+    return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
 def view_all_books(request):
@@ -33,21 +49,6 @@ def view_books_by_year_and_category(request, category, year):
     books_by_year_and_category = get_list_or_404(
         Book, category=category, year=year)
     return render(request, 'books_by_year_and_category.html', {'books': books_by_year_and_category, 'category': category, 'year': year})
-
-
-def search(request):
-    query = request.GET.get('q')
-    if query:
-        results = Book.objects.filter(
-            models.Q(title__icontains=query) |
-            models.Q(author__icontains=query) |
-            models.Q(category__icontains=query) |
-            models.Q(year__icontains=query)
-        )
-    else:
-        results = []
-
-    return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
 def view_all_authors(request):
